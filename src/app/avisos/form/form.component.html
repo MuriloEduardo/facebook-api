@@ -1,0 +1,61 @@
+<a [routerLink]="['/avisos']" class="btn btn-light">Voltar</a>
+<form
+  class="needs-validation"
+  novalidate
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+>
+  <fieldset class="form-group">
+    <label for="titulo">Título</label>
+    <input
+      type="text"
+      class="form-control"
+      id="titulo"
+      placeholder="Título"
+      formControlName="titulo"
+      [ngClass]="{ 'is-invalid': submitted && hasError('titulo') }"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="hasError('titulo') && hasError('titulo')['required']"
+    >
+      Por favor insira um título.
+    </div>
+    <div
+      class="invalid-feedback"
+      *ngIf="hasError('titulo') && hasError('titulo')['minlength']"
+    >
+      Precisa ter no mínimo
+      {{ hasError("titulo")["minlength"].requiredLength }} caractéries.
+    </div>
+    <div
+      class="invalid-feedback"
+      *ngIf="hasError('titulo') && hasError('titulo')['maxlength']"
+    >
+      Precisa ter no máximo
+      {{ hasError("titulo")["maxlength"].requiredLength }} caractéries.
+    </div>
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="mensagem">Mensagem</label>
+    <textarea
+      id="mensagem"
+      placeholder="Mensagem"
+      formControlName="mensagem"
+      [ngClass]="{ 'is-invalid': submitted && hasError('mensagem') }"
+      class="form-control"
+    ></textarea>
+    <div
+      class="invalid-feedback"
+      *ngIf="hasError('mensagem') && hasError('mensagem')['required']"
+    >
+      Por favor insira uma mensagem.
+    </div>
+  </fieldset>
+  <fieldset class="form-group">
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <button type="reset" class="btn btn-default" (click)="onCancel()">
+      Cancelar
+    </button>
+  </fieldset>
+</form>
